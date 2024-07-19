@@ -908,8 +908,12 @@ function getIphoneModel() {
   };
 
   function getScreenWidth() {
+    createEl(`window.screen.width:${window.screen.width}`);
+    createEl(`window.screen.height:${window.screen.height}`);
+    createEl(`window.devicePixelRatio:${window.devicePixelRatio}`);
     return Math.max(window.screen.width, window.screen.height) * (window.devicePixelRatio || 1);
   }
+  getScreenWidth()
 
   function getGlRenderer() {
     var GPU;
@@ -920,22 +924,22 @@ function getIphoneModel() {
           var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
           if (context) {
             var info = context.getExtension("WEBGL_debug_renderer_info");
+            createEl(`WEBGL_debug_renderer_info:${info}`);
             if (info) {
               value = context.getParameter(info.UNMASKED_RENDERER_WEBGL);
+              createEl(`UNMASKED_RENDERER_WEBGL:${value}`);
             }
           }
         }
       }
       GPU = value;
     });
-    console.log('GPU', GPU)
     return GPU;
   }
-
+  getGlRenderer()
   function getModels() {
     var models,
       device = devices[getGlRenderer()];
-      console.log("🚀 ~ file: iPhone-detect.min.js:938 ~ getModels ~ device:", device)
     if (device == undefined) {
       models = ["iPhone"];
     } else {
@@ -948,6 +952,11 @@ function getIphoneModel() {
   }
   return getModels()[0];
 }
+createEl(`navigator.userAgent:${navigator.userAgent}`);
 
 export default getIphoneModel;
-
+function createEl(params) {
+  const el = document.createElement("div");
+  el.innerText = params;
+  document.querySelector("body").appendChild(el);
+}
