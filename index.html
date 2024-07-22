@@ -52,7 +52,6 @@
         createEl(`window.devicePixelRatio: ${window.devicePixelRatio}`);
         createEl(`navigator.hardwareConcurrency: ${navigator.hardwareConcurrency}`);
         createEl(`navigator.userAgent: ${navigator.userAgent}`);
-        createEl(`wgslLanguageFeatures.size: ${navigator.gpu.wgslLanguageFeatures.size}`);
         return {
             width: window.screen.width,
             height: window.screen.height,
@@ -69,7 +68,7 @@
                 return item.resolution === info.resolution
             })
             createEl(`filterArr: ${JSON.stringify(filterArr)}`);
-
+            createEl(`wgslLanguageFeatures.size: ${navigator.gpu.wgslLanguageFeatures.size}`);
             console.log("🚀 info:", info)
             console.log("🚀 filterArr:", filterArr)
         } catch (error) {
