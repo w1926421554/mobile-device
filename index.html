@@ -63,14 +63,18 @@
         // return Math.max(window.screen.width, window.screen.height) * (window.devicePixelRatio || 1);
     }
     function getPhoneModel() {
-        const info = getScreenWidth()
-        const filterArr = devices.filter(item => {
-            return item.resolution === info.resolution
-        })
-        createEl(`filterArr: ${JSON.stringify(filterArr)}`);
+        try {
+            const info = getScreenWidth()
+            const filterArr = devices.filter(item => {
+                return item.resolution === info.resolution
+            })
+            createEl(`filterArr: ${JSON.stringify(filterArr)}`);
 
-        console.log("🚀 info:", info)
-        console.log("🚀 filterArr:", filterArr)
+            console.log("🚀 info:", info)
+            console.log("🚀 filterArr:", filterArr)
+        } catch (error) {
+            createEl(`error: ${JSON.stringify(error)}`);
+        }
     }
 
     getPhoneModel()
