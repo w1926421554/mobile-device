@@ -9,12 +9,69 @@
 <script type="module" src="./index.js"></script>
 <!-- <script src="https://www.jsdelivr.com/#!mobile-detect.js"></script>
 <script type="module" src="./index.js"></script> -->
-<script>
 
-</script>
 
 <body>
     <div class="phone"></div>
 </body>
+<script>
+    const devices = [
+        { model: "iPhone X", resolution: "375x812", cpu: "4", chip: "A11 Bionic" },
+        { model: "iPhone XR", resolution: "414x896", cpu: "4", chip: "A12 Bionic" },
+        { model: "iPhone XS", resolution: "375x812", cpu: "4", chip: "A12 Bionic" },
+        { model: "iPhone XS Max", resolution: "414x896", cpu: "4", chip: "A12 Bionic" },
+        { model: "iPhone 11", resolution: "414x896", cpu: "4", chip: "A13 Bionic" },
+        { model: "iPhone 11 Pro", resolution: "375x812", cpu: "4", chip: "A13 Bionic" },
+        { model: "iPhone 11 Pro Max", resolution: "414x896", cpu: "4", chip: "A13 Bionic" },
+        { model: "iPhone 12", resolution: "390x844", cpu: "4", chip: "A14 Bionic" },
+        { model: "iPhone 12 Mini", resolution: "360x780", cpu: "4", chip: "A14 Bionic" },
+        { model: "iPhone 12 Pro", resolution: "390x844", cpu: "4", chip: "A14 Bionic" },
+        { model: "iPhone 12 Pro Max", resolution: "428x926", cpu: "4", chip: "A14 Bionic" },
+        { model: "iPhone 13", resolution: "390x844", cpu: "4", chip: "A15 Bionic" },
+        { model: "iPhone 13 Mini", resolution: "375x812", cpu: "4", chip: "A15 Bionic" },
+        { model: "iPhone 13 Pro", resolution: "390x844", cpu: "4", chip: "A15 Bionic" },
+        { model: "iPhone 13 Pro Max", resolution: "428x926", cpu: "4", chip: "A15 Bionic" },
+        { model: "iPhone 14", resolution: "390x844", cpu: "4", chip: "A16 Bionic" },
+        { model: "iPhone 14 Plus", resolution: "428x926", cpu: "4", chip: "A16 Bionic" },
+        { model: "iPhone 14 Pro", resolution: "393x852", cpu: "4", chip: "A16 Bionic" },
+        { model: "iPhone 14 Pro Max", resolution: "430x932", cpu: "4", chip: "A16 Bionic" },
+        { model: "iPhone 15", resolution: "393x852", cpu: "4", chip: "A17 Bionic" },
+        { model: "iPhone 15 Plus", resolution: "430x932", cpu: "4", chip: "A17 Bionic" },
+        { model: "iPhone 15 Pro", resolution: "393x852", cpu: "4", chip: "A17 Bionic" },
+        { model: "iPhone 15 Pro Max", resolution: "430x932", cpu: "4", chip: "A17 Bionic" }
+    ];
+
+    function createEl(params) {
+        const el = document.createElement("div");
+        el.innerText = params;
+        document.querySelector("body").appendChild(el);
+    }
+    function getScreenWidth() {
+        createEl(`window.screen.width: ${window.screen.width}`);
+        createEl(`window.screen.height: ${window.screen.height}`);
+        createEl(`window.devicePixelRatio: ${window.devicePixelRatio}`);
+        createEl(`navigator.hardwareConcurrency: ${navigator.hardwareConcurrency}`);
+        return {
+            width: window.screen.width,
+            height: window.screen.height,
+            resolution: window.screen.width + 'x' + window.screen.height,
+            devicePixelRatio: window.devicePixelRatio,
+            hardwareConcurrency: navigator.hardwareConcurrency
+        }
+        // return Math.max(window.screen.width, window.screen.height) * (window.devicePixelRatio || 1);
+    }
+    function getPhoneModel() {
+        const info = getScreenWidth()
+        const filterArr = devices.filter(item => {
+            return item.resolution === info.resolution
+        })
+        createEl(`filterArr: ${JSON.stringify(filterArr)}`);
+
+        console.log("🚀 info:", info)
+        console.log("🚀 filterArr:", filterArr)
+    }
+
+    getPhoneModel()
+</script>
 
 </html>
