@@ -51,6 +51,8 @@
         createEl(`window.screen.height: ${window.screen.height}`);
         createEl(`window.devicePixelRatio: ${window.devicePixelRatio}`);
         createEl(`navigator.hardwareConcurrency: ${navigator.hardwareConcurrency}`);
+        createEl(`navigator.userAgent: ${navigator.userAgent}`);
+        createEl(`wgslLanguageFeatures.size: ${navigator.gpu.wgslLanguageFeatures.size}`);
         return {
             width: window.screen.width,
             height: window.screen.height,
