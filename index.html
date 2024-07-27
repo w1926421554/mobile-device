@@ -1,83 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<script type="module" src="./index.js"></script>
-<!-- <script src="https://www.jsdelivr.com/#!mobile-detect.js"></script>
-<script type="module" src="./index.js"></script> -->
-
-
-<body>
-    <div class="phone"></div>
-</body>
-<script>
-    const devices = [
-        { model: "iPhone X", resolution: "375x812", cpu: "4", chip: "A11 Bionic" },
-        { model: "iPhone XR", resolution: "414x896", cpu: "4", chip: "A12 Bionic" },
-        { model: "iPhone XS", resolution: "375x812", cpu: "4", chip: "A12 Bionic" },
-        { model: "iPhone XS Max", resolution: "414x896", cpu: "4", chip: "A12 Bionic" },
-        { model: "iPhone 11", resolution: "414x896", cpu: "4", chip: "A13 Bionic" },
-        { model: "iPhone 11 Pro", resolution: "375x812", cpu: "4", chip: "A13 Bionic" },
-        { model: "iPhone 11 Pro Max", resolution: "414x896", cpu: "4", chip: "A13 Bionic" },
-        { model: "iPhone 12", resolution: "390x844", cpu: "4", chip: "A14 Bionic" },
-        { model: "iPhone 12 Mini", resolution: "360x780", cpu: "4", chip: "A14 Bionic" },
-        { model: "iPhone 12 Pro", resolution: "390x844", cpu: "4", chip: "A14 Bionic" },
-        { model: "iPhone 12 Pro Max", resolution: "428x926", cpu: "4", chip: "A14 Bionic" },
-        { model: "iPhone 13", resolution: "390x844", cpu: "4", chip: "A15 Bionic" },
-        { model: "iPhone 13 Mini", resolution: "375x812", cpu: "4", chip: "A15 Bionic" },
-        { model: "iPhone 13 Pro", resolution: "390x844", cpu: "4", chip: "A15 Bionic" },
-        { model: "iPhone 13 Pro Max", resolution: "428x926", cpu: "4", chip: "A15 Bionic" },
-        { model: "iPhone 14", resolution: "390x844", cpu: "4", chip: "A16 Bionic" },
-        { model: "iPhone 14 Plus", resolution: "428x926", cpu: "4", chip: "A16 Bionic" },
-        { model: "iPhone 14 Pro", resolution: "393x852", cpu: "4", chip: "A16 Bionic" },
-        { model: "iPhone 14 Pro Max", resolution: "430x932", cpu: "4", chip: "A16 Bionic" },
-        { model: "iPhone 15", resolution: "393x852", cpu: "4", chip: "A17 Bionic" },
-        { model: "iPhone 15 Plus", resolution: "430x932", cpu: "4", chip: "A17 Bionic" },
-        { model: "iPhone 15 Pro", resolution: "393x852", cpu: "4", chip: "A17 Bionic" },
-        { model: "iPhone 15 Pro Max", resolution: "430x932", cpu: "4", chip: "A17 Bionic" }
-    ];
-
-    function createEl(params) {
-        const el = document.createElement("div");
-        el.innerText = params;
-        document.querySelector("body").appendChild(el);
-    }
-    function getScreenWidth() {
-        createEl(`window.screen.width: ${window.screen.width}`);
-        createEl(`window.screen.height: ${window.screen.height}`);
-        createEl(`window.devicePixelRatio: ${window.devicePixelRatio}`);
-        createEl(`navigator.hardwareConcurrency: ${navigator.hardwareConcurrency}`);
-        createEl(`navigator.userAgent: ${navigator.userAgent}`);
-        return {
-            width: window.screen.width,
-            height: window.screen.height,
-            resolution: window.screen.width + 'x' + window.screen.height,
-            devicePixelRatio: window.devicePixelRatio,
-            hardwareConcurrency: navigator.hardwareConcurrency
+<html>
+    <head>
+        <meta http-equiv="Delegate-CH" content="sec-ch-ua-full-version-list https://cloud.51degrees.com; sec-ch-ua-model https://cloud.51degrees.com; sec-ch-ua-platform https://cloud.51degrees.com; sec-ch-ua-platform-version https://cloud.51degrees.com"/>
+    </head>
+    <body>
+        <h1>51Degrees cloud example</h1>
+        <button type="button" onclick="buttonClicked()">Use my location</button>
+        <div id="htmlExampleOutput"></div>
+    </body>
+    <script async src="https://cloud.51degrees.com/api/v4/AQTd61diy4vPsPCt3Eg.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            fod.complete(function (data) {
+                // Fetch the properties from the JSON response and write to the page.
+                addText("IsMobile: " + data.device["ismobile"]);
+                addText("JavascriptGetHighEntropyValues: " + data.device["javascriptgethighentropyvalues"]);
+                addText("SetHeaderBrowserAccept-CH: " + data.device["setheaderbrowseraccept-ch"]);
+                addText("SetHeaderHardwareAccept-CH: " + data.device["setheaderhardwareaccept-ch"]);
+                addText("HardwareVendor: " + data.device["hardwarevendor"]);
+                addText("HardwareModel: " + data.device["hardwaremodel"]);
+                addText("HardwareName: " + data.device["hardwarename"]);
+                addText("DeviceType: " + data.device["devicetype"]);
+                addText("PlatformVendor: " + data.device["platformvendor"]);
+                addText("SetHeaderPlatformAccept-CH: " + data.device["setheaderplatformaccept-ch"]);
+                addText("PlatformName: " + data.device["platformname"]);
+                addText("PlatformVersion: " + data.device["platformversion"]);
+                addText("BrowserVendor: " + data.device["browservendor"]);
+                addText("BrowserName: " + data.device["browsername"]);
+                addText("BrowserVersion: " + data.device["browserversion"]);
+                addText("IsSmartPhone: " + data.device["issmartphone"]);
+            });
         }
-        // return Math.max(window.screen.width, window.screen.height) * (window.devicePixelRatio || 1);
-    }
-    function getPhoneModel() {
-        try {
-            const info = getScreenWidth()
-            const filterArr = devices.filter(item => {
-                return item.resolution === info.resolution
-            })
-            createEl(`filterArr: ${JSON.stringify(filterArr)}`);
-            createEl(`wgslLanguageFeatures.size: ${navigator.gpu}`);
-            console.log("🚀 info:", info)
-            console.log("🚀 filterArr:", filterArr)
-        } catch (error) {
-            createEl(`error: ${JSON.stringify(error)}`);
-        }
-    }
-
-    // getPhoneModel()
     
-</script>
-
+        addText = function(text) {
+            document.getElementById("htmlExampleOutput").innerHTML+=text + "<br>";
+        }
+    </script>
 </html>
